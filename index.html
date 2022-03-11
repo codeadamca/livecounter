@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        .step-container {
+            border: 5px solid red;
+            padding: 50px;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+    <div id="step-1" class="step-container">
+
+        <a href="#" onclick="chooseTime(1);">1</a>
+        <a href="#" onclick="chooseTime(2);">2</a>
+        <a href="#" onclick="chooseTime(3);">3</a>
+        <a href="#" onclick="chooseTime(5);">5</a>
+        <a href="#" onclick="chooseTime(10);">10</a>
+        <a href="#" onclick="chooseTime(15);">15</a>
+
+    </div>
+
+    <div id="step-2" class="step-container">
+
+        <a href="#" onclick="chooseTopic(1);">JavaScript</a>
+        <a href="#" onclick="chooseTopic(2);">PHP</a>
+        <a href="#" onclick="chooseTopic(3);">Node.js</a>
+        <a href="#" onclick="chooseTopic(4);">Debugging</a>
+
+    </div>
+
+    <div id="step-3" class="step-container">
+
+        <div id="left">
+
+            TIMER
+
+        </div>
+
+        <div id="right">
+
+            
+
+        </div>
+
+    </div>
+
+    <div id="step-4" class="step-container">
+
+        SOMETHING
+
+    </div>
+
+    <script>
+
+        var time = 0;
+        var topic = "";
+        var interval;
+
+        var topics = new Array();
+        var memes = new Array();
+        var memeCounter = 0;
+
+        var step1 = document.getElementById("step-1");
+        var step2 = document.getElementById("step-2");
+        var step3 = document.getElementById("step-3");
+        var step4 = document.getElementById("step-4");
+
+        var left = document.getElementById("left");
+        var right = document.getElementById("right");
+
+        step2.style.display = "none";
+        step3.style.display = "none";
+        step4.style.display = "none";
+
+        function chooseTime(newTime)
+        {
+            time = newTime * 60;
+            step1.style.display = "none";
+            step2.style.display = "block";
+        }
+
+        function chooseTopic(newTopic)
+        {
+            topic = newTopic;
+            step2.style.display = "none";
+            step3.style.display = "block";
+
+            var requestURL = 'https://console.codeadam.ca/api/memes/tag/1';
+            var request = new XMLHttpRequest();
+            request.open('GET', requestURL);
+            request.responseType = 'json';
+            request.send();
+
+            request.onload = function() {
+
+                const memeData = request.response;
+
+                for(var i = 0; i < memeData.length; i++) 
+                {
+                    memes[i] = memeData[i].image;
+                }
+
+                interval = setInterval(timer, 1000);
+            }
+
+        }
+
+        function timer()
+        {
+            var minutes = Math.floor(time / 60);
+            var seconds = time % 60;
+            if(seconds < 10) seconds = "0" + seconds;
+
+            left.innerHTML = minutes + ":" + seconds;
+
+            if(time == 0)
+            {
+                clearInterval(interval);
+                step3.style.display = "none";
+                step4.style.display = "block";
+            }
+
+            else if(time % 20 == 0)
+            {
+                if(memeCounter == memes.length)
+                {
+                    memeCounter = 0;
+                }
+
+                right.innerHTML = '<img src="' +
+                    memes[memeCounter] +
+                    '">';
+
+                memeCounter ++;
+            }
+
+            time --;
+        }
+
+    </script>
+    
+</body>
+</html>
