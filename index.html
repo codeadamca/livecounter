@@ -1,145 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 
-    <style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .step-container {
-            border: 5px solid red;
-            padding: 50px;
-            text-align: center;
-        }
+  <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
 
-    </style>
+  <title>LiveCounter | Adam Thomas</title>
+
+  <style>
+
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Lora', serif;
+    color: #ffffff;
+  }
+
+  #step-1,
+  #step-4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #F4433A;
+  }
+  #step-1-box,
+  #step-4-box {
+    font-size: 12vh;
+    text-align: center;
+  }
+    
+  #step-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #eb741d;
+  }
+  #step-2-box {
+    height: auto;
+    font-size: 8vh;
+    text-align: center;
+  }
+    
+  #step-3 {
+    display: block;
+    height: 100vh;
+    background-color: #F4433A;
+  }
+  #step-3-left,
+  #step-3-right {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+  }
+  #step-3-left {
+    width: 30vw;
+    justify-content: center;
+  }
+  #step-3-right {
+    width: 70vw;
+    justify-content: left;
+    background-color: #eb741d;
+  }
+  #step-3-left-box {
+    height: 16vh;
+    font-size: 14vh;
+    text-align: center;
+  }
+  #step-3-right-box {
+    font-size: 8vh;
+    text-align: center;
+    width: 100vw;
+  }
+  #step-3-right-box img {
+    max-width: 80%;
+    max-height: 80vh;
+    border: 10px solid #fff;
+  }
+  
+  #step-1 a {
+    display: inline-block;
+    background-color: #eb741d;
+    padding: 0.2vw 1vw;
+  }
+    
+  #step-2 a {
+    display: inline-block;
+    background-color: #F4433A;
+    padding: 0.2vw 1vw;
+    margin-bottom: 1vw;
+  }
+    
+  a:link,
+  a:active,
+  a:hover,
+  a:visited {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  #refresh {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    font-size: 30px;
+    padding: 15px;
+  }
+  #codeadam {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 24px;
+    padding: 15px;
+  }
+
+  </style>
 
 </head>
 <body>
+    
+  <div id="refresh">
+    <a href="#" onclick="return refresh();">&#10227;</a>
+  </div>
+  
+  <div id="codeadam">
+    <a href="https://codeadam.ca"><img src="https://codeadam.ca/images/code-block-white.png" width="30"></a>
+  </div>
+  
+  <div id="step-1">
+  
+    <div id="step-1-box">
 
-
-    <div id="step-1" class="step-container">
-
-        <a href="#" onclick="chooseTime(1);">1</a>
-        <a href="#" onclick="chooseTime(2);">2</a>
-        <a href="#" onclick="chooseTime(3);">3</a>
-        <a href="#" onclick="chooseTime(5);">5</a>
-        <a href="#" onclick="chooseTime(10);">10</a>
-        <a href="#" onclick="chooseTime(15);">15</a>
-
-    </div>
-
-    <div id="step-2" class="step-container">
-
-        <a href="#" onclick="chooseTopic(1);">JavaScript</a>
-        <a href="#" onclick="chooseTopic(2);">PHP</a>
-        <a href="#" onclick="chooseTopic(3);">Node.js</a>
-        <a href="#" onclick="chooseTopic(4);">Debugging</a>
-
-    </div>
-
-    <div id="step-3" class="step-container">
-
-        <div id="left"></div>
-
-        <div id="right"></div>
+      <a href="#" onclick="return chooseTime(1);">1</a>
+      <a href="#" onclick="return chooseTime(2);">2</a>
+      <a href="#" onclick="return chooseTime(3);">3</a>
+      <a href="#" onclick="return chooseTime(5);">5</a>
+      <a href="#" onclick="return chooseTime(10);">10</a>
+      <a href="#" onclick="return chooseTime(15);">15</a>
 
     </div>
 
-    <div id="step-4" class="step-container">
+  </div>
 
-        SOMETHING
+  <div id="step-2">
+    
+    <div id="step-2-box"></div>
 
+  </div>
+
+  <div id="step-3" class="step-container">
+
+    <div id="step-3-left">
+      <div id="step-3-left-box"></div>
     </div>
+    <div id="step-3-right">
+      <div id="step-3-right-box"></div>  
+    </div>
+
+  </div>
+
+  <div id="step-4" class="step-container">
+  
+    <div id="step-4-box">
+      Class will resume shortly!
+    </div>
+    
+  </div>
 
     <script>
 
-        var time = 0;
-        var topic = "";
-        var interval;
+    var time = 0;
+    var topic = "";
+    var interval;
 
-        var topics = new Array();
-        var memes = new Array();
-        var memeCounter = 0;
+    var topics = new Array();
+    var memes = new Array();
+    var memeCounter = 0;
 
-        var step1 = document.getElementById("step-1");
-        var step2 = document.getElementById("step-2");
-        var step3 = document.getElementById("step-3");
-        var step4 = document.getElementById("step-4");
+    var step1 = document.getElementById("step-1");
+    var step2 = document.getElementById("step-2");
+    var step3 = document.getElementById("step-3");
+    var step4 = document.getElementById("step-4");
 
-        var left = document.getElementById("left");
-        var right = document.getElementById("right");
+    var step1Box = document.getElementById("step-1-box");
+    var step2Box = document.getElementById("step-2-box");
+    var step3LeftBox = document.getElementById("step-3-left-box");
+    var step3RightBox = document.getElementById("step-3-right-box");
+    var step4Box = document.getElementById("step-4-box");
 
-        step2.style.display = "none";
-        step3.style.display = "none";
-        step4.style.display = "none";
+    step2.style.display = "none";
+    step3.style.display = "none";
+    step4.style.display = "none";
 
-        function chooseTime(newTime)
+    function chooseTime(newTime)
+    {
+
+      time = newTime * 60;
+
+      var requestURL = 'https://console.codeadam.ca/api/tags';
+      var request = new XMLHttpRequest();
+      request.open('GET', requestURL);
+      request.responseType = 'json';
+      request.send();
+
+      request.onload = function() {
+
+        const tagData = request.response;
+
+        for(var i = 0; i < tagData.length; i++) 
         {
-            time = newTime * 60;
-            step1.style.display = "none";
-            step2.style.display = "block";
+          step2Box.innerHTML += ' <a href="#" onclick="return chooseTopic(' + tagData[i].id + ')">' + tagData[i].title + '</a> ';
         }
 
-        function chooseTopic(newTopic)
+        step1.style.display = "none";
+        step2.style.display = "flex";
+
+      }
+
+      return false;
+
+    }
+
+    function chooseTopic(newTopic)
+    {
+
+      topic = newTopic;
+      step2.style.display = "none";
+      step3.style.display = "flex";
+
+      var requestURL = 'https://console.codeadam.ca/api/memes/tag/' + newTopic;
+      var request = new XMLHttpRequest();
+      request.open('GET', requestURL);
+      request.responseType = 'json';
+      request.send();
+
+      request.onload = function() {
+
+        const memeData = request.response;
+
+        for(var i = 0; i < memeData.length; i++) 
         {
-            topic = newTopic;
-            step2.style.display = "none";
-            step3.style.display = "block";
-
-            var requestURL = 'https://console.codeadam.ca/api/memes/tag/1';
-            var request = new XMLHttpRequest();
-            request.open('GET', requestURL);
-            request.responseType = 'json';
-            request.send();
-
-            request.onload = function() {
-
-                const memeData = request.response;
-
-                for(var i = 0; i < memeData.length; i++) 
-                {
-                    memes[i] = memeData[i].image;
-                }
-
-                interval = setInterval(timer, 1000);
-            }
-
+          memes[i] = memeData[i];
         }
 
-        function timer()
+        interval = setInterval(timer, 1000);
+        openFullscreen();
+
+      }
+
+      return false;
+
+    }
+
+    function timer()
+    {
+
+      var minutes = Math.floor(time / 60);
+      var seconds = time % 60;
+      if(seconds < 10) seconds = "0" + seconds;
+
+      step3LeftBox.innerHTML = minutes + ":" + seconds;
+
+      if(time == 0)
+      {
+        clearInterval(interval);
+        setTimeout(endSlideshow, 2000);
+      }
+
+      else if(time % 20 == 0)
+      {
+        if(memeCounter == memes.length)
         {
-            var minutes = Math.floor(time / 60);
-            var seconds = time % 60;
-            if(seconds < 10) seconds = "0" + seconds;
-
-            left.innerHTML = minutes + ":" + seconds;
-
-            if(time == 0)
-            {
-                clearInterval(interval);
-                step3.style.display = "none";
-                step4.style.display = "block";
-            }
-
-            else if(time % 20 == 0)
-            {
-                if(memeCounter == memes.length)
-                {
-                    memeCounter = 0;
-                }
-
-                right.innerHTML = '<img src="' +
-                    memes[memeCounter] +
-                    '">';
-
-                memeCounter ++;
-            }
-
-            time --;
+          memeCounter = 0;
         }
+
+        step3RightBox.innerHTML = '<img src="' +
+          memes[memeCounter].image +
+          '">';
+
+        var requestURL = 'https://console.codeadam.ca/api/memes/displayed/' + memes[memeCounter].id;
+        var request = new XMLHttpRequest();
+        request.open('GET', requestURL);
+        request.responseType = 'json';
+        request.send();
+
+        memeCounter ++;
+      }
+
+      time --;
+
+    }
+
+    function endSlideshow()
+    {
+
+      closeFullscreen();
+      step3.style.display = "none";
+      step4.style.display = "flex";
+
+    }
+
+    function refresh()
+    {
+
+      closeFullscreen();
+      clearInterval(interval);
+
+      step1.style.display = "flex";
+      step2.style.display = "none";
+      step3.style.display = "none";
+      step4.style.display = "none";
+
+      time = 0;
+      topic = "";
+
+      topics = new Array();
+      memes = new Array();
+      memeCounter = 0;
+
+      step2Box.innerHTML = "";
+      step3LeftBox.innerHTML = "";
+      step3RightBox.innerHTML = "";
+
+      return false;
+
+    }
+
+
+
+    var elem = document.documentElement;
+
+    /* View in fullscreen */
+    function openFullscreen() 
+    {
+
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+
+    }
+
+    /* Close fullscreen */
+    function closeFullscreen() 
+    {
+
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+      }
+
+    }
 
     </script>
     
