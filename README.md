@@ -1,6 +1,8 @@
-# livecounter
+# A Live Countdown Timer Tool
 
 A basic web application that generates a countdown and a slideshow using programming memes based on a chosen topic. 
+
+![LiveCounter](https://github.com/codeadamca/livecounter/blob/main/screenshot-livecounter.png?raw=true)
 
 ## Tutorial Requirements:
 
