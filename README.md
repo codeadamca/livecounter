@@ -1,4 +1,4 @@
-# A Live Countdown Timer Tool
+# LiveCounter
 
 A basic web application that generates a countdown and a slideshow using programming memes based on a chosen topic. 
 
