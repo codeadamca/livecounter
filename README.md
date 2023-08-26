@@ -4,6 +4,9 @@ A basic web application that generates a countdown and a slideshow using program
 
 ![LiveCounter](_readme/screenshot-livecounter.png)
 
+> LiveCounter is available to view at:
+> https://pages.codeadam.ca/livecounter/
+
 ***
 
 ## Repo Resources
