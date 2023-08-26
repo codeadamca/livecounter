@@ -2,9 +2,11 @@
 
 A basic web application that generates a countdown and a slideshow using programming memes based on a chosen topic. 
 
-![LiveCounter](https://github.com/codeadamca/livecounter/blob/main/screenshot-livecounter.png?raw=true)
+![LiveCounter](_readme/screenshot-livecounter.png)
 
-## Tutorial Requirements:
+***
+
+## Repo Resources
 
 * [Visual Studio Code](https://code.visualstudio.com/)
 * [LiveCounter](https://pages.codeadam.ca/livecounter/)
